@@ -1,5 +1,6 @@
 package condensedmatrix
 
+// CondensedMatrix is the interface used for both CachedMatrix and Matrix
 type CondensedMatrix interface {
 	Position(offset int) (i, j int)
 	Offset(i, j int) int
