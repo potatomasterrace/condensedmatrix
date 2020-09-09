@@ -13,11 +13,12 @@ func getPositions(size int) [][]int {
 	}
 	return pos
 }
+func doNothing(v int) {
+}
 func BenchmarkMatrices(b *testing.B) {
 	size := 10000
 	realSize := GetRealSize(size)
-	doNothing := func(v int) {
-	}
+
 	b.Run("init", func(b *testing.B) {
 		b.Run("baseline_no_op", func(b *testing.B) {
 			doNothing(size)
