@@ -36,19 +36,12 @@ func TestAssignDefault(t *testing.T) {
 	assertConsistency(t, m)
 }
 
-func TestForBadSizes(t *testing.T) {
+func TestPositionForBadSizes(t *testing.T) {
 	t.Run("createPosition size<1", func(t *testing.T) {
 		panicked, err := catch.Panic(func() {
 			createPosition(-42, 0, 1)
 		})
 		assert.Equal(t, fmt.Sprint(err), "can not have a size of -42")
-		assert.True(t, panicked)
-	})
-	t.Run("CreateCachedMatrix size<1", func(t *testing.T) {
-		panicked, err := catch.Panic(func() {
-			CreateCachedMatrix(-42)
-		})
-		assert.Equal(t, fmt.Sprint(err), "cached matrix size can not be less than 2 requested : -42")
 		assert.True(t, panicked)
 	})
 	t.Run("p.i > size", func(t *testing.T) {
@@ -66,6 +59,15 @@ func TestForBadSizes(t *testing.T) {
 		assert.Equal(t, fmt.Sprint(err), "can not have positon at (0,5), exceeding size 5")
 	})
 }
+
+func TestCreateCachedMatrix(t *testing.T) {
+	panicked, err := catch.Panic(func() {
+		CreateCachedMatrix(-42)
+	})
+	assert.Equal(t, fmt.Sprint(err), "cached matrix size can not be less than 2 requested : -42")
+	assert.True(t, panicked)
+}
+
 func TestForEachPosition(t *testing.T) {
 
 	m := CreateCachedMatrix(4)

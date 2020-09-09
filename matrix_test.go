@@ -6,8 +6,17 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/potatomasterrace/catch"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestCreateMatrix(t *testing.T) {
+	panicked, err := catch.Panic(func() {
+		CreateMatrix(-42)
+	})
+	assert.Equal(t, fmt.Sprint(err), "cached matrix size can not be less than 2 requested : -42")
+	assert.True(t, panicked)
+}
 
 func TestMatrix(t *testing.T) {
 	t.Run("TestAssignDefault", func(t *testing.T) {
