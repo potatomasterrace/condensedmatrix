@@ -66,8 +66,9 @@ func colInRow(s, j int) int {
 
 // ComputeCoordinates computes the coordinates at the offset inside a condensed matrix of size s.
 func ComputeCoordinates(s, offset int) (i, j int) {
-	_s, _o := float64(s), float64(offset)
-	i = int(math.Ceil((1/2.)*(-math.Sqrt(-8*_o+4*math.Pow(_s, 2)-4*_s-7)+2*_s-1) - 1))
+	v1 := math.Sqrt(float64(-8*offset + 4*(s*s) - 4*s - 7))
+	v2 := float64(2*s - 1)
+	i = int(math.Ceil((1/2.)*(v2-v1) - 1))
 	j = s - colInRow(s, i+1) + offset
 	return i, j
 }
