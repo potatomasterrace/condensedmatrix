@@ -1,4 +1,4 @@
-module potatomasterrace/condensedmatrix
+module github.com/potatomasterrace/condensedmatrix
 
 go 1.14
 
