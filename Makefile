@@ -1,17 +1,11 @@
 test:
-	go test
-
-lint:
-	pylint --rcfile=pylint.rc matching_algorithms/
-	pylint --rcfile=pylint.rc tests/
+	go test -coverprofile cover.out
 
 bench:
-	go test -bench=. -benchtime 10000x
+	go test -bench=. -benchtime 1000000x
 
-coverage:
-	go test -coverprofile cover.out
+coverage: test
 	go tool cover -html=cover.out
-	sleep 5 && rm cover.out 
+	sleep 1 && rm cover.out 
 
-regression_test:
-	python dataset_test.py
+check: coverage bench
